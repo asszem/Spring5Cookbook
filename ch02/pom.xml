@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.pact.cookbook</groupId>
+	<artifactId>ch02-xml</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<properties>
+		<spring.version>5.0.0.BUILD-SNAPSHOT</spring.version>
+		<servlet.api.version>3.1.0</servlet.api.version>
+	</properties>
+	<!-- Spring 5 dependencies -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+	</dependencies>
+	<!-- This is from where the Spring dependencies will be downloaded -->
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/libs-snapshot</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<build>
+		<finalName>ch02-xml-spring5-cookbook</finalName>
+		<plugins>
+			<!-- Add Maven plugin for Deployment -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<!-- Be sure to recognize web.xml as the deployment descriptor. This 
+					can be done by enabling <failOnMissingWebXml> or just deleting the <configuration> 
+					tag -->
+				<configuration>
+					<failOnMissingWebXml>enable</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<!-- Tomcat7 plugin (Tomcat9 is not available according to Spring5Cookbook) -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>https://spring5server:8443/manager/text</url>
+					<path>/ch01</path>
+					<keystoreFile>C:MyFilesDevelopmentServersTomcat9.0
+						confspring5server.keystore</keystoreFile>
+					<keystorePass>packt@@</keystorePass>
+					<update>true</update>
+					<username>packt</username>
+					<password>packt</password>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
