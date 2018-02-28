@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.pact.recipe.core</groupId>
-	<artifactId>ch02-xml</artifactId>
+	<groupId>org.packt.cookbook</groupId>
+	<artifactId>ch02-jc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
@@ -32,6 +32,13 @@
 			<artifactId>spring-beans</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<!-- To support projects without using web.xml by implementing WebApplicationInitializer 
+				to programmatically configure Servletcontext -->
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 	</dependencies>
 	<!-- This is from where the Spring dependencies will be downloaded -->
 	<repositories>
@@ -45,7 +52,7 @@
 		</repository>
 	</repositories>
 	<build>
-		<finalName>ch02-xml-spring5-cookbook</finalName>
+		<finalName>ch03-jc-spring5-cookbook</finalName>
 		<plugins>
 			<!-- Add Maven plugin for Deployment -->
 			<plugin>
@@ -55,7 +62,7 @@
 					can be done by enabling <failOnMissingWebXml> or just deleting the <configuration> 
 					tag -->
 				<!-- <configuration> -->
-				<!-- <failOnMissingWebXml>false</failOnMissingWebXml> -->
+				<!-- <failOnMissingWebXml>enable</failOnMissingWebXml> -->
 				<!-- </configuration> -->
 			</plugin>
 			<!-- Tomcat7 plugin (Tomcat9 is not available according to Spring5Cookbook) -->
@@ -65,7 +72,7 @@
 				<version>2.2</version>
 				<configuration>
 					<url>https://spring5server:8443/manager/text</url>
-					<path>/ch02</path>
+					<path>/ch01</path>
 					<keystoreFile>C:MyFilesDevelopmentServersTomcat9.0
 						confspring5server.keystore</keystoreFile>
 					<keystorePass>packt@@</keystorePass>
@@ -74,18 +81,6 @@
 					<password>packt</password>
 				</configuration>
 			</plugin>
-			<!-- This plugin was not mentioned in the book but was involved in the 
-				code -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
-	<name>Spring 5 Cookbook</name>
 </project>
